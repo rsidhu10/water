@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Circle extends Model
 {
+	protected $primaryKey = 'id'; 
+    protected $keyType = 'string';
+    public $incrementing = false;
     protected $fillable = [
 	    'id',
 	    'zone_id',

@@ -63,7 +63,7 @@
 
     <div style="position: fixed; bottom: 10px; right: 10px; color: green;">
         <strong>
-            @Punjabwater
+            &copy Punjabwater.net
         </strong>
     </div>
 </body>

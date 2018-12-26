@@ -17,3 +17,8 @@ Route::get('/', function () {
 
 Route::resource('zones','ZonesController');
 Route::resource('circles','CirclesController');
+
+Route::post('/form-submit',[
+'uses' => 'CirclesController@formSubmit',
+ 'as' => 'f.submit',
+]);

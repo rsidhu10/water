@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Circle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
+use App\Circle;
 class CirclesController extends Controller
 {
     /**
@@ -24,7 +25,7 @@ class CirclesController extends Controller
      */
     public function create()
     {
-        //
+        return view('circles.create');
     }
 
     /**
@@ -81,5 +82,16 @@ class CirclesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function formSubmit(Request $indata)
+    {
+       // $data = Input::get('fname');
+      //  $data = Input::all();
+      //  $data = $indata->get('fname');
+        $data = $indata->all();
+
+        dd($data);
+        //echo "{$data}";
     }
 }
