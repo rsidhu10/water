@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Zone;
+
+use App\User;
 use Illuminate\Http\Request;
-//use DB;
-class ZonesController extends Controller
+
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,11 +14,7 @@ class ZonesController extends Controller
      */
     public function index()
     {
-       
-        $zones = Zone::all();
-       // return view('zones.index',compact('zones'));
-        return view('zones.index',['zones'=>$zones]);
-        
+        //
     }
 
     /**
@@ -44,24 +41,21 @@ class ZonesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Zone $zone)
+    public function show(User $user)
     {
-        $zone = Zone::find($zone->id);
-        //dd($zone);
-        return view('zones.show', ['zone'=>$zone]);
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         //
     }
@@ -70,10 +64,10 @@ class ZonesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -81,10 +75,10 @@ class ZonesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         //
     }

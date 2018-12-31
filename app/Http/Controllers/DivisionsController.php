@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Zone;
+
+use App\Division;
 use Illuminate\Http\Request;
-//use DB;
-class ZonesController extends Controller
+
+class DivisionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,11 +14,8 @@ class ZonesController extends Controller
      */
     public function index()
     {
-       
-        $zones = Zone::all();
-       // return view('zones.index',compact('zones'));
-        return view('zones.index',['zones'=>$zones]);
-        
+        $divisions = Division::all();
+        return view('divisions.index',compact('divisions'));
     }
 
     /**
@@ -44,24 +42,23 @@ class ZonesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Division  $division
      * @return \Illuminate\Http\Response
      */
-    public function show(Zone $zone)
+    public function show(Division $division)
     {
-        $zone = Zone::find($zone->id);
+        $division = Division::find($division->id);
         //dd($zone);
-        return view('zones.show', ['zone'=>$zone]);
-
+        return view('divisions.show', ['division'=>$division]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Division  $division
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Division $division)
     {
         //
     }
@@ -70,10 +67,10 @@ class ZonesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Division  $division
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Division $division)
     {
         //
     }
@@ -81,10 +78,10 @@ class ZonesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Division  $division
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Division $division)
     {
         //
     }

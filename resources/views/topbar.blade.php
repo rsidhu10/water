@@ -52,10 +52,9 @@
 			</ul>
 		</div>
 	</nav>
-    <div class="container well">
-        <h2 class="text-center" style="margin-top: 5px; padding-top: 0;">Prepare Estimate</h2>
-        
-    </div>
+    {{-- <div class="container well">
+        <h4 class="text-center" style="margin-top: 0px; padding-top: 0;">Prepare Estimate</h4>
+    </div> --}}
 
     <div class="container">
         @yield('mainContent')

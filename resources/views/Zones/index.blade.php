@@ -1,82 +1,63 @@
 @extends('topbar')
-
-
-
 @section('mainContent')
-	<h1>List Car</h1>
-
-	<table class="table table-striped">
+	<div class="container" style="text-align: center;"><h3>Zone wise Status</h3></div>
+	<table class="table table-striped table-responsive table-bordered">
 		<thead>
 			<tr>
-				<th>ID</th>
-				<th>Zone</th>
-				<th>ਜ਼ੋਨ</th>
-				<th>ਕੋਡ</th>
+				<th rowspan="2">Sr.</th>
+				<th rowspan="2">Zone</th>
+				<th colspan="7" style="text-align: center;">Number of </th>
+			</tr>
+			<tr>
+				<th>Circles</th>
+				<th>Districts</th>
+				<th>Divisions</th>
+				<th>Sub Divisions</th>
+				<th>Blocks</th>
+				<th>Schemes</th>
+				<th>Habitations</th>
 			</tr>
 		</thead>
 		<tbody>
+		
 		@foreach($zones as $zone)
 		<tr>
+			<td style="text-align: center;">{{1}}</td>
+			<td><a href="zones/{{$zone->id}}">{{$zone->zone_pname}}</a> </td>
 			<td>{{$zone->id}}</td>
-			<td><a href="zones/{{$zone->user_level}}">{{$zone->zone_name}}</a> </td>
-			<td>{{$zone->zone_pname}}</td>
 			<td>{{$zone->id}}</td>
+			<td>{{$zone->id}}</td>
+			<td>{{$zone->id}}</td>
+			<td>{{$zone->id}}</td>
+			<td>{{$zone->id}}</td>
+			<td></td>
 		</tr>
+		
 		@endforeach
 		</tbody>
 	</table>
-	<hr>
-	<a href="zones/create">Add New Car</a>
+		
 	<div class="container">
 		<div class="table-responsive" id="Combo_details">
-		   	<table class="table table-striped">
+			<table>
 				<tr>
-					<th>Zone</th>
-					<th>Circle</th>
-					<th>District</th>
-					<th>Blocks</th>
-					<th>Scheme</th>
-					<th>Habitation</th>
-				</tr>
-				<tr>
-					<!-- <td>
-						<select name="zone-cbo" id="zone-cbo" class="form-control input-sm" autofocus="autofocus" required>
-							<option value="">Select Zone</option>
-							@foreach($zones as $zone)
-							<option value={{$zone->name}}>{{$zone->zone_pname}}</option>
-							@endforeach
-					    </select>
+					<td>
+						
 					</td>
 					<td>
-						<select name="zone-cbo" id="zone-cbo" class="form-control input-sm" autofocus="autofocus" required>
-							<option value="">Select Zone</option>
-							@foreach($zones as $zone)
-							<option value= 
-							{{$zone->name}}>{{$zone->zone_pname}}</option>
-							@endforeach
-					    </select>
+
+						  {!! Form::Label('Zone', 'Zone:') !!}
+						  <select class="form-control " name="zone_id">
+						    @foreach($zones as $zone)
+						      <option value="{{$zone->id}}">{{$zone->zone_name}}</option>
+						    @endforeach
+						  </select>
 					</td>
-					<td>
-						<select name="zone-cbo" id="zone-cbo" class="form-control input-sm" autofocus="autofocus" required>
-							<option value="">Select Zone</option>
-							@foreach($zones as $zone)
-							<option value={{$zone->user_level}}>{{$zone->zone_pname}}</option>
-							@endforeach
-					    </select>
-					</td>
-					<td>
-						<select name="zone-cbo" id="zone-cbo" class="form-control input-sm" autofocus="autofocus" required>
-							<option value="">Select Zone</option>
-							@foreach($zones as $zone)
-							<option value={{$zone->name}}>{{$zone->zone_pname}}</option>
-							@endforeach
-					    </select>
-					</td> -->
+
 				</tr>
 			</table>
-		</div>
 	</div>
-
+	</div>	
 
 @endsection
 

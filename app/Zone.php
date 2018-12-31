@@ -21,4 +21,14 @@ class Zone extends Model
     	'zone_pname',
     	'user_level'
     ];
+
+	public function circles()
+	    {
+	        return $this->hasMany('App\Circle');
+	    }
+ 
 }
+
+
+
+

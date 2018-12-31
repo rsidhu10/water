@@ -1,34 +1,31 @@
 @extends('topbar')
 @section('mainContent')
-	<div class="container" style="text-align: center;"><h3>Circle wise Status</h3></div>
+
+	<div class="container" style="text-align: center;"><h3>District wise Status of </h3></div>
 	<table class="table table-striped table-responsive table-bordered">
 		<thead>
 			<tr>
 				<th rowspan="2">Sr.</th>
-				<th rowspan="2">Circle</th>
+				<th rowspan="2">Sub Division</th>
 				<th colspan="6" style="text-align: center;">Number of </th>
 			</tr>
 			<tr>
-				<th>Districts</th>
-				<th>Divisions</th>
-				<th>Sub Divisions</th>
 				<th>Blocks</th>
 				<th>Schemes</th>
 				<th>Habitations</th>
 			</tr>
 		</thead>
 		<tbody>
-		@foreach($circles as $circle)
+			
+		@foreach($division->subdivisions as $subdivision)
+		
 		<tr>
-			<td>{{$circle->id}}</td>
-			<td><a href="districts/{{$circle->id}}">
-				{{$circle->circle_pname}}</a></td>
-			<td>{{$circle->id}}</td>
+			<td>{{$subdivision->id}}</td>
+			<td><a href="/subdivisions/{{$subdivision->id}}">
+				{{$subdivision->subdivision_name}}</a></td>
+			<td>{{$subdivision->id}}</td>
 			<td>{{1}}</td>
 			<td>{{2}}</td>
-			<td>{{3}}</td>
-			<td>{{4}}</td>
-			<td>{{5}}</td>
 		</tr>
 		@endforeach
 		</tbody>

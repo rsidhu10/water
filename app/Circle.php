@@ -17,4 +17,14 @@ class Circle extends Model
 	    'user_level'
 	];
 
+	public function districts()
+    {
+        return $this->hasMany('App\District');
+    }
+
+	public function zone()
+    {
+        return $this->belongsTo('App\Zone');
+    }    
+
 }

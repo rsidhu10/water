@@ -14,12 +14,16 @@ class CreateCirclesTable extends Migration
     public function up()
     {
         Schema::create('circles', function (Blueprint $table) {
-            $table->string('id', 3)->unique();
+            $table->string('id', 3);
             $table->string('zone_id', 3);
-            $table->string('circle_name', 18);
-            $table->string('circle_pname', 18);
+            $table->string('circle_name', 25);
+            $table->string('circle_pname', 25);
             $table->string('circle_sname', 3);
-            $table->integer('user_level', 3);
+            $table->string('user_level', 3);
+
+            $table->foreign('zone_id')->references('id')->on('zones');
+            $table->timestamps();
+            $table->primary('id');
         });
     }
 

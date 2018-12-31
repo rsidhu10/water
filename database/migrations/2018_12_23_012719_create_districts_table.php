@@ -14,14 +14,18 @@ class CreateDistrictsTable extends Migration
     public function up()
     {
         Schema::create('districts', function (Blueprint $table) {
-            $table->string('id', 3)->unique();
+            $table->string('id', 3);
             $table->string('zone_id', 3);
             $table->string('circle_id', 3);
-            $table->string('district_name', 18);
-            $table->string('district_pname', 18);
+            $table->string('district_name', 25);
+            $table->string('district_pname', 25);
             $table->string('district_sname', 3);
-            $table->integer('user_level', 3);
+            $table->string('user_level', 3);
+            
+            $table->foreign('zone_id')->references('id')->on('zones');
+            $table->foreign('circle_id')->references('id')->on('circles');
             $table->timestamps();
+            $table->primary('id');
         });
     }
 

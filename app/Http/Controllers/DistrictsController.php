@@ -1,13 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\District;
 use Illuminate\Http\Request;
-use App\Http\Requests\TestRequest;
-use Illuminate\Support\Facades\Input;
-use Validator;
 use DB;
-use App\Circle;
-class CirclesController extends Controller
+class DistrictsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +13,8 @@ class CirclesController extends Controller
      */
     public function index()
     {
-       $circles = Circle::all();
-        return view('circles.index',compact('circles'));
+        $districts = District::all();
+        return view('districts.index',compact('districts'));
     }
 
     /**
@@ -27,24 +24,7 @@ class CirclesController extends Controller
      */
     public function create()
     {
-
-       DB::enableQueryLog();
-       DB::table('zones')->get();
-       DB::table('circles')->get();
-       DB::table('users')->get();
-       DB::table('zones')
-        ->where([
-            ['zone_name','like','central'],
-        ])
-        ->orWhere([['id','Z01'],
-    ])
-       ->get();
-
-       $log = DB::getQueryLog();
-       //dd($log);
-       dd(end($log));
-       // dd(session());
-        return view('circles.create');
+        //
     }
 
     /**
@@ -64,11 +44,11 @@ class CirclesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Circle $circle)
+    public function show(District $district)
     {
-       $circle = Circle::find($circle->id);
+       $district = District::find($district->id);
         //dd($zone);
-        return view('circles.show', ['circle'=>$circle]);
+        return view('districts.show', ['district'=>$district]);
     }
 
     /**
@@ -103,26 +83,5 @@ class CirclesController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function formSubmit(TestRequest $indata)
-    {
-        // $this->validate($indata,[
-        //     'fname' => 'required',
-        //     'lname' => 'alpha',
-        // ]);
-       // $data = Input::get('fname');
-      //  $data = Input::all();
-      //  $data = $indata->get('fname');
-      //  $data = $indata->all();
-      //  $v = Validator::make($indata->all(),[
-       //     'fname' => ['required']
-       // ]);
-        // if( $v->fails()){
-        //     return back();
-        // }
-        // //dd($data);
-        echo $indata->fname;
-        echo $indata->lname;
     }
 }
