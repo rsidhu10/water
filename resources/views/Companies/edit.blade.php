@@ -1,8 +1,10 @@
 @extends('layouts.app')
 @section('content')
+{{-- @extends('layouts.topbar')
+@section('content') --}}
   {{--$company->projects as $project--}}
   <div class="col-md-9 col-lg-9 col-sm-9 pull-left">
-    <div class="row col-md-12 col-lg-12 col-sm-12" style="background: white; margin: 10px;">
+    <div class="row  col-lg-12 col-sm-12 col-md-12" style="background: white; margin: 10px;">
       <form method="post" action="{{route('companies.update',[$company->id])}}">
         {{csrf_field()}}
         <input type="hidden" name="_method" value="put">
@@ -15,7 +17,8 @@
                   spellcheck="false"
                   class="form-control"
                   value="{{ $company->name}}" 
-                  type="text" />  
+                  type="text" 
+                  style="width: 90%" />  
         </div>
         <div class="form-group">
           <label for="company-content">Description</label>
@@ -34,7 +37,7 @@
         </div>
         
       </form>
-        
+    
     </div>
   </div>
   <div class="col-sm-3 col-md-3 col-lg-3 pull-right">

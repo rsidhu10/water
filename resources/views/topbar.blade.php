@@ -7,6 +7,9 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+
 
 </head>
 <body>
@@ -18,7 +21,7 @@
 				<a class="navbar-brand" href="#">DWSS Pb.</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="active"><a href=".">Home</a></li>
+				<li class="active"><a href="/zones">Home</a></li>
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">Data Entry
 					<span class="caret"></span></a>

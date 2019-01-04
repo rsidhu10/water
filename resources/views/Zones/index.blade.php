@@ -4,11 +4,8 @@
 	<table class="table table-striped table-responsive table-bordered">
 		<thead>
 			<tr>
-				<th rowspan="2">Sr.</th>
-				<th rowspan="2">Zone</th>
-				<th colspan="7" style="text-align: center;">Number of </th>
-			</tr>
-			<tr>
+				<th>Sr.</th>
+				<th>Zone</th>
 				<th>Circles</th>
 				<th>Districts</th>
 				<th>Divisions</th>
@@ -19,10 +16,10 @@
 			</tr>
 		</thead>
 		<tbody>
-		
+		<?php $num =1; ?>
 		@foreach($zones as $zone)
 		<tr>
-			<td style="text-align: center;">{{1}}</td>
+			<td style="text-align: center;">{{$num}}</td>
 			<td><a href="zones/{{$zone->id}}">{{$zone->zone_pname}}</a> </td>
 			<td>{{$zone->id}}</td>
 			<td>{{$zone->id}}</td>
@@ -32,7 +29,7 @@
 			<td>{{$zone->id}}</td>
 			<td></td>
 		</tr>
-		
+		<?php $num++; ?>
 		@endforeach
 		</tbody>
 	</table>

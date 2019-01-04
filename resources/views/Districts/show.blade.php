@@ -5,11 +5,8 @@
 	<table class="table table-striped table-responsive table-bordered">
 		<thead>
 			<tr>
-				<th rowspan="2">Sr.</th>
-				<th rowspan="2">Division</th>
-				<th colspan="6" style="text-align: center;">Number of </th>
-			</tr>
-			<tr>
+				<th>Sr.</th>
+				<th>Division</th>
 				<th>Sub Divisions</th>
 				<th>Blocks</th>
 				<th>Schemes</th>
@@ -17,11 +14,11 @@
 			</tr>
 		</thead>
 		<tbody>
-			
+		<?php $num =1; ?>	
 		@foreach($district->divisions as $division)
 		
 		<tr>
-			<td>{{$division->id}}</td>
+			<td>{{$num}}</td>
 			<td><a href="/divisions/{{$division->id}}">
 				{{$division->division_name}}</a></td>
 			<td>{{$division->id}}</td>
@@ -31,6 +28,7 @@
 			
 			
 		</tr>
+		<?php $num++; ?>
 		@endforeach
 		</tbody>
 	</table>

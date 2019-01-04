@@ -81,16 +81,16 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Water Project in Laravel
+                    Project Water Punjab
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://laravel.com/docs">Estimates</a>
+                    <a href="https://laracasts.com">Admin Approvals</a>
+                    <a href="https://laravel-news.com">Technical Approvals</a>
+                    <a href="https://nova.laravel.com">NOC's Received</a>
+                    <a href="https://forge.laravel.com">Work Alloted</a>
+                    <a href="https://github.com/laravel/laravel">PCR Submitted</a>
                 </div>
             </div>
         </div>

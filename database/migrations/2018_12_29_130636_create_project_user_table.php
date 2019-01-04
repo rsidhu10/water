@@ -20,6 +20,7 @@ class CreateProjectUserTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('project_id')->references('id')->on('projects');
             $table->timestamps();
+            
         });
     }
 

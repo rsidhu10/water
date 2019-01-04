@@ -5,28 +5,26 @@
 	<table class="table table-striped table-responsive table-bordered">
 		<thead>
 			<tr>
-				<th rowspan="2">Sr.</th>
-				<th rowspan="2">Sub Division</th>
-				<th colspan="6" style="text-align: center;">Number of </th>
-			</tr>
-			<tr>
+				<th>Sr.</th>
+				<th>Sub Division</th>
 				<th>Blocks</th>
 				<th>Schemes</th>
 				<th>Habitations</th>
 			</tr>
 		</thead>
 		<tbody>
-			
+		<?php $num =1; ?>	
 		@foreach($division->subdivisions as $subdivision)
 		
 		<tr>
-			<td>{{$subdivision->id}}</td>
+			<td>{{$num}}</td>
 			<td><a href="/subdivisions/{{$subdivision->id}}">
 				{{$subdivision->subdivision_name}}</a></td>
 			<td>{{$subdivision->id}}</td>
 			<td>{{1}}</td>
 			<td>{{2}}</td>
 		</tr>
+		<?php $num++; ?>
 		@endforeach
 		</tbody>
 	</table>

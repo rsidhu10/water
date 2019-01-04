@@ -5,11 +5,8 @@
 	<table class="table table-striped table-responsive table-bordered">
 		<thead>
 			<tr>
-				<th rowspan="2">Sr.</th>
-				<th rowspan="2">District</th>
-				<th colspan="6" style="text-align: center;">Number of </th>
-			</tr>
-			<tr>
+				<th>Sr.</th>
+				<th>District</th>
 				<th>Divisions</th>
 				<th>Sub Divisions</th>
 				<th>Blocks</th>
@@ -18,11 +15,11 @@
 			</tr>
 		</thead>
 		<tbody>
-			
+		<?php $num =1; ?>	
 		@foreach($circle->districts as $district)
 		
 		<tr>
-			<td>{{$district->id}}</td>
+			<td>{{$num}}</td>
 			<td><a href="/districts/{{$district->id}}">
 				{{$district->district_name}}</a></td>
 			<td>{{$district->id}}</td>
@@ -32,6 +29,7 @@
 			<td>{{4}}</td>
 			
 		</tr>
+		<?php $num++; ?>
 		@endforeach
 		</tbody>
 	</table>
