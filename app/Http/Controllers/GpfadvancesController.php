@@ -14,7 +14,8 @@ class GpfadvancesController extends Controller
      */
     public function index()
     {
-        //
+        $gpfadvances = Gpfadvance::all();
+        return view('gpfadvances.index',compact('gpfadvances'));
     }
 
     /**
@@ -24,7 +25,8 @@ class GpfadvancesController extends Controller
      */
     public function create()
     {
-        //
+        $Gpfadvances = Gpfadvance::all();
+        return view('gpfadvances.index',compact('Gpfadvances'));
     }
 
     /**

@@ -1,14 +1,15 @@
 @extends('topbar')
 @section('mainContent')
 	
-	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
- 	<div class="container" style="text-align: center;">
-		<h3>List of Administrative Approved Schemes</h3>
+ 	
+  <div class="container" style="text-align: center;">
+		<h3>Data Entry of Administrative Approved Schemes</h3>
 	</div>
   <div class="container-fluid" style="width: 90%">
-    {{Form::open() }}
+    <form method="post" name="save-form" id="save-form" action="{{route('adminapprovals.store')}}">
+      {{ csrf_field() }}
       <table class="table table-condensed table-striped">
         <tr>
           <td width="12%" align="left" style="padding-left: 10px;">
@@ -27,13 +28,13 @@
             <span>Scheme</span>
           </td>
           <td width="10%" align="center">
-            <input  type="text" name="division-txt" id="division-txt" style="width: 1px; visibility: hidden; height: 10px;" >
-            <input  type="text" name="subdivision-txt" id="subdivision-txt" style="width: 1px; visibility: hidden; height: 10px;" >
+            <input  type="text" name="division_txt" id="division_txt" style="width: 1px; visibility: hidden; height: 10px;" >
+            <input  type="text" name="subdivision_txt" id="subdivision_txt" style="width: 1px; visibility: hidden; height: 10px;" >
           </td>
         </tr>
         <tr>
           <td>
-            <select class="form-control input-sm" name="zone-cbo" id="zone-cbo"  autofocus="autofocus" required>
+            <select class="form-control input-sm" name="zone_cbo" id="zone_cbo"  autofocus="autofocus" required>
                 <option value="" disable="true" Selected hidden>Select Zone</option>
                 @foreach($zones as $zone)
                   <option value="{{$zone->id}}">{{$zone->zone_name}}</option>
@@ -41,22 +42,22 @@
             </select>
           </td>         
           <td>
-            <select name="circle-cbo" id="circle-cbo" class="form-control input-sm" autofocus="autofocus" required>
+            <select name="circle_cbo" id="circle_cbo" class="form-control input-sm" autofocus="autofocus" required>
                 <option value="">Select Circle</option>
             </select>
           </td>
           <td>
-            <select name="district-cbo" id="district-cbo"  class="form-control input-sm" autofocus="autofocus" required>
+            <select name="district_cbo" id="district_cbo"  class="form-control input-sm" autofocus="autofocus" required>
               <option value="">Select District</option>
             </select>
           </td>
           <td>
-            <select name="block_cbo" id="block-cbo" class="form-control input-sm" autofocus="autofocus" required>
+            <select name="block_cbo" id="block_cbo" class="form-control input-sm" autofocus="autofocus" required>
               <option value="">Select Block</option>
             </select>
           </td>
           <td>
-            <select name="scheme_cbo" id="scheme-cbo" class="form-control input-sm" autofocus="autofocus" required>
+            <select name="scheme_cbo" id="scheme_cbo" class="form-control input-sm" autofocus="autofocus" required>
               <option value="">Select Scheme</option>
             </select>
           </td>
@@ -65,6 +66,10 @@
           </td>
         </tr>
       </table>
+      <div class="alert alert-success" style="visibility: hidden;" id="message">
+        <p id="result" name="result" style="text-align: center;">
+        </p>
+      </div>
      {{-- <div  class="table-responsive" id="Combo_details" >
         <table class="table table-striped" style="width: 75%; align-self: center;"> --}}
         <table class="table table-condensed table-striped">
@@ -81,19 +86,29 @@
           </tr>
           <tr>  
             <td>
-              <select name="approvaltype-cbo" id="approvaltype-cbo" class="form-control input-sm" autofocus="autofocus" required>
-                  <option value="" selected=hidden>Select Approval Type</option>
-                 
+              <select name="approvaltype_cbo" id="approvaltype_cbo" class="form-control input-sm" autofocus="autofocus" required>
+                  <option value="" disable="true" Selected hidden>Select Approval Type</option>
+                  <option value="1">New Approval</option>
+                  <option value="2">Revised Approval</option>
+                  
               </select>
             </td>
             <td>
-              <select name="approvedby-cbo" id="approvedby-cbo" class="form-control input-sm" autofocus="autofocus" required>
-                  <option value="" selected=hidden >Select Approved By</option>   
+              <select name="approvedby_cbo" id="approvedby_cbo" class="form-control input-sm" autofocus="autofocus" required>
+                  <option value=""  Selected hidden >Select Approved By</option>
+                  <option value="1">Government</option>
+                  <option value="2">Deputy Commissionor</option>
+                  <option value="3">Chief Engineer</option>   
               </select>
             </td>
             <td>
-              <select name="component-cbo" id="component-cbo" class="form-control input-sm" autofocus="autofocus" required>
-                  <option value="">Select Component</option>
+              <select name="component_cbo" id="component_cbo" class="form-control input-sm" autofocus="autofocus" required>
+                  <option value=""  Selected hidden >Select Component</option>
+                  <option value="101">2a</option>
+                  <option value="102">2b</option>
+                  <option value="103">1a(i)</option>
+                  <option value="104">1a(ii)</option>
+                  <option value="105">1a(iii)</option>   
               </select>
             </td>
           </tr>
@@ -110,13 +125,13 @@
           </tr>
           <tr>  
             <td>
-              <input class="form-control input-sm" type="text" name="admin-approval-no-txt" id="admin-approval-no-txt" placeholder="Admin Approval No." required>
+              <input class="form-control input-sm" type="text" name="admin_approval_no_txt" id="admin_approval_no_txt" placeholder="Admin Approval No." required>
             </td>
             <td>
-              <input class="form-control input-sm" type="date" name="admin-approval-dt-txt" id="admin-approval-dt-txt" placeholder="Admin Approval Date" required> 
+              <input class="form-control input-sm" type="date" name="admin_approval_dt_txt" id="admin_approval_dt_txt" placeholder="Admin Approval Date" required> 
             </td>
             <td>
-              <input class="form-control input-sm" type="text" name="admin-approval-amt-txt" id="admin-approval-amt-txt" placeholder="Admin Approval Amt."  required >
+              <input class="form-control input-sm" type="text" name="admin_approval_amt_txt" id="admin_approval_amt_txt" placeholder="Admin Approval Amt."  required >
             </td>
           </tr>
           <tr>
@@ -132,13 +147,13 @@
           </tr>
           <tr>
             <td>
-              <input class="form-control input-sm" type="text" name="nrdwp-share-txt" id="nrdwp-share-txt" placeholder="NRDWP Funds." required >              
+              <input class="form-control input-sm" type="text" name="nrdwp_share_txt" id="nrdwp_share_txt" placeholder="NRDWP Funds." required >              
             </td>
             <td>
-              <input class="form-control input-sm" type="text" name="state-share-txt" id="state-share-txt" placeholder="State Share" required >
+              <input class="form-control input-sm" type="text" name="state_share_txt" id="state_share_txt" placeholder="State Share" required >
             </td>
             <td>
-              <input class="form-control input-sm" type="text" name="wb-share-txt" id="wb-share-txt" placeholder="World Bank Share" required >
+              <input class="form-control input-sm" type="text" name="wb_share_txt" id="wb_share_txt" placeholder="World Bank Share" required >
             </td> 
           </tr>
           <tr>
@@ -161,97 +176,12 @@
 
         {{ Form::close() }}
       </div>
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="/resources/js/scripts/fill.js"></script>
-{{--
-    <script type="text/javascript">
-      $('#zone-cbo').on('change', function(e){
-        console.log(e);
-        var zone_id = e.target.value;
-        $.get('/json-circles?zone_id=' + zone_id,function(data) {
-          console.log(data);
-          $('#circle-cbo').empty();
-          $('#circle-cbo').append('<option value="0" disable="true" Selected hidden> Select Circle </option>');
+  <script src="/resources/js/scripts/adminapprovals/fill.js"></script>
+  <script src="/resources/js/scripts/adminapprovals/addnew.js"></script>
+  
 
-          $('#district-cbo').empty();
-          $('#district-cbo').append('<option value="0" disable="true" Selected hidden> Select District </option>');
-
-          $('#block-cbo').empty();
-          $('#block-cbo').append('<option value="0" disable="true" Selected hidden> Select Block </option>');
-
-          $('#scheme-cbo').empty();
-          $('#scheme-cbo').append('<option value="0" disable="true" Selected hidden> Select Scheme </option>');
-
-          $.each(data, function(index, dataObj){
-            $('#circle-cbo').append('<option value="'+ dataObj.id +'">'+ dataObj.circle_name +'</option>');
-          })
-        });
-      });
-
-      $('#circle-cbo').on('change', function(e){
-        console.log(e);
-        var circle_id = e.target.value;
-        
-        $.get('/json-districts?circle_id=' + circle_id,function(data) {
-          console.log(data);
-
-          $('#district-cbo').empty();
-          $('#district-cbo').append('<option value="0" disable="true" Selected hidden> Select District </option>');
-
-          $('#block-cbo').empty();
-          $('#block-cbo').append('<option value="0" disable="true" Selected hidden> Select Block </option>');
-
-          $('#scheme-cbo').empty();
-          $('#scheme-cbo').append('<option value="0" disable="true" Selected hidden> Select Scheme </option>');
-
-          $.each(data, function(index, dataObj){
-            $('#district-cbo').append('<option value="'+ dataObj.id +'">'+ dataObj.district_name +'</option>');
-          })
-        });
-      });
-
-      $('#district-cbo').on('change', function(e){
-        console.log(e);
-        var district_id = e.target.value;
-        
-        $.get('/json-blocks?district_id=' + district_id,function(data) {
-          console.log(data);
-
-          $('#block-cbo').empty();
-          $('#block-cbo').append('<option value="0" disable="true" Selected hidden> Select Block </option>');
-
-          $('#scheme-cbo').empty();
-          $('#scheme-cbo').append('<option value="0" disable="true" Selected hidden> Select Scheme </option>');
-
-          $.each(data, function(index, dataObj){
-            $('#block-cbo').append('<option value="'+ dataObj.id +'">'+ dataObj.block_name +'</option>');
-          })
-        });
-      });
-
-      $('#block-cbo').on('change', function(e){
-        console.log(e);
-        var block_id = e.target.value;
-        
-        $.get('/json-schemes?block_id=' + block_id,function(data) {
-          console.log(data);
-
-          $('#scheme-cbo').empty();
-          $('#scheme-cbo').append('<option value="0" disable="true" Selected hidden> Select Scheme </option>');
-
-          $.each(data, function(index, dataObj){
-            $('#scheme-cbo').append('<option value="'+ dataObj.id +'">'+ dataObj.scheme_name +'</option>');
-          })
-        });
-      });
-
-    </script>
---}}
-
-
-
+    
 @endsection
 

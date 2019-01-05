@@ -33,6 +33,8 @@ class CreateGpfadvancesTable extends Migration
             $table->string('cashbook_no', 10)->nullable();
             $table->date('cashbook_dt')->nullable();
             $table->longText('remarks')->nullable();
+            $table->string('flaged', 1)->default(0);
+            $table->date('retirement_dt')->nullable();
             $table->timestamps();
         });
     }

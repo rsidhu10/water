@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Estimates</a>
+                    <a href="/estimates.index">Estimates</a>
                     <a href="https://laracasts.com">Admin Approvals</a>
                     <a href="https://laravel-news.com">Technical Approvals</a>
                     <a href="https://nova.laravel.com">NOC's Received</a>
