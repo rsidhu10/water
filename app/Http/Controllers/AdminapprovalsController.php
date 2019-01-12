@@ -9,9 +9,13 @@ use App\Subdivision;
 use App\Block;
 use App\Scheme;
 use App\Adminapproval;
+use App\Employee;
+use App\Designation;
+use App\Salary;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-
+use Yajra\Datatables\Datatables;
 class AdminapprovalsController extends Controller
 {
     /**
@@ -23,6 +27,18 @@ class AdminapprovalsController extends Controller
     {
         $zones = Zone::all();
         return view('adminapprovals.index',compact('zones'));
+      //     $scheme_id = '10001';
+      // $schemedata = Scheme::where('id', '=', $scheme_id)->get();
+      
+      // return Datatables::of($scheme_id)
+      //   ->addColumn('action',function($scheme_id){
+      //       '<a onclick="showData('.$scheme_id->id.')" class="btn btn-sm btn-success">show</a>';
+      //   })->make(true);
+      // echo "<pre>";
+      // print_r($schemedata);
+      // exit();
+      // dd($schemedata);
+      //return response()->json($schemedata);
     }
 
     /**
@@ -71,10 +87,11 @@ class AdminapprovalsController extends Controller
     }
 
     public function schemedata(){
-      $scheme_id = Input::get('scheme_id');
+     // $scheme_id = Input::get('scheme_id');
+      $scheme_id = '10001';
       $schemedata = Scheme::where('id', '=', $scheme_id)->get();
-      dd($schemedata);
-      return response()->json($schemedata);
+      //dd($schemedata);
+      return response()->compact($schemedata);
     }
 
 
@@ -159,4 +176,25 @@ class AdminapprovalsController extends Controller
     {
         //
     }
+
+    public function showRecord()
+    {
+      $employees = Employee::join('designations','designations.id','=','employees.designation_id')
+                              ->join('salaries','salaries.emp_id', '=', 'employees.id')
+                      ->selectRaw('designations.designation,
+                                  designations.category,
+                                  employees.id,
+                                  employees.emp_name,
+                                  employees.pan_card,
+                                  salaries.gross_pay,
+                                  salaries.month,
+                                  salaries.income_tax'
+                                  )
+                      //->where('month','Oct')
+                      ->get();
+          //  return response($employees);
+              return view('adminapprovals.employeelist', compact('employees'));        
+    }
+
+
 }

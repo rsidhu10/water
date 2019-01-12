@@ -2,8 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Zone;
+use App\Circle;
+use App\District;
+use App\Division;
+
+use App\Employee;
+use App\Designation;
+
+
 use App\Gpfadvance;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GpfadvancesController extends Controller
 {
@@ -14,9 +25,43 @@ class GpfadvancesController extends Controller
      */
     public function index()
     {
-        $gpfadvances = Gpfadvance::all();
-        return view('gpfadvances.index',compact('gpfadvances'));
+       // $gpfadvances = Gpfadvance::all()->paginate(15);
+        $designations = DB::table('designations')
+                    ->orderBy('id')
+                    ->orderBy('designation')
+                    ->get();                
+
+                  //dd($gpfadvances);  
+        return view('gpfadvances.index', compact('designations'));
     }
+
+    public function showAdvance()
+    {
+        $gpfadvances = Gpfadvance::join('designations','designations.id','=','gpfadvances.emp_designation')
+                    ->selectRaw('designations.designation,
+                                  gpfadvances.id,
+                                  gpfadvances.year,
+                                  gpfadvances.gpf_no,
+                                  gpfadvances.emp_name,
+                                  gpfadvances.amount,
+                                  gpfadvances.refundable,
+                                  gpfadvances.motive,
+                                  gpfadvances.order_no,
+                                  gpfadvances.order_dt
+                                  ')->get();
+
+                     // ->orderBy('emp_name')
+                     // ->orderBy('year')
+                    
+        // return response($gpfadvances);
+                   // dd($gpfadvances);
+        //$gpfadvances = Gpfadvance::all();
+       //dd($gpfadvances);
+        return view('gpfadvances.advanceslist',    compact('gpfadvances'));        
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -25,8 +70,15 @@ class GpfadvancesController extends Controller
      */
     public function create()
     {
+       $zones = Zone::all();
+   //     return view('adminapprovals.addnew',compact('zones'));
+        return view('gpfadvances.create',['zones'=>$zones]);
+    }
+
+    public function addrec()
+    {
         $Gpfadvances = Gpfadvance::all();
-        return view('gpfadvances.index',compact('Gpfadvances'));
+        return view('gpfadvances.insertadvance',compact('Gpfadvances'));
     }
 
     /**
@@ -37,7 +89,31 @@ class GpfadvancesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax())
+        {
+            
+            $advance = Gpfadvance::create([
+                'year'              => $request->input('year_id'),
+                'category'          => $request->input('amount_id'),
+                'gpf_no'            => $request->input('emp_gpf_no'),
+                'emp_name'          => $request->input('emp_name'),
+                'emp_designation'   => $request->input('designation_id'),
+                'amount'            => $request->input('amount_id'),
+                'refundable'        => $request->input('advtype_id'),
+                'order_no'          => $request->input('order_no_id'),
+                'order_dt'          => $request->input('order_dt_id'),
+                'motive'            => $request->input('adv_motive'),
+                
+        
+        ]);
+            
+
+
+        return response($advance);
+        $Gpfadvances = Gpfadvance::all();
+        return view('gpfadvances.index',compact('Gpfadvances'));
+        }
+
     }
 
     /**
@@ -84,4 +160,10 @@ class GpfadvancesController extends Controller
     {
         //
     }
+        
+
+
+
+
+
 }

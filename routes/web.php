@@ -23,15 +23,17 @@ Route::resource('subdivisions','subdivisionsController');
 Route::resource('adminapprovals','AdminapprovalsController');
 Route::resource('estimates','EstimatesController');
 Route::resource('gpfadvances','GpfadvancesController');
-Route::get('adminapprovals/addnew','DatafillController@zones');
-Route::get('/json-circles','AdminapprovalsController@circles');
+Route::post('gpfadvances/store','GpfadvancesController@store');
+Route::post('gpfadvances/addrec','GpfadvancesController@addrec');
 
-//Route::get('/json-regencies','CountryController@regencies');
-  Route::get('/json-circles','AdminapprovalsController@circles');
-  Route::get('/json-districts','AdminapprovalsController@districts');
-  Route::get('/json-blocks', 'AdminapprovalsController@blocks');
-  Route::get('/json-schemes', 'AdminapprovalsController@schemes');
-  Route::get('/json-schemedata', 'AdminapprovalsController@schemedata');
+Route::get('/json-circles','AdminapprovalsController@circles');
+Route::get('/json-districts','AdminapprovalsController@districts');
+Route::get('/json-blocks', 'AdminapprovalsController@blocks');
+Route::get('/json-schemes', 'AdminapprovalsController@schemes');
+Route::get('/json-schemedata', 'AdminapprovalsController@schemedata');
+Route::get('/show-data', 'AdminapprovalsController@showRecord');
+Route::get('/show-gpf-adv', 'GpfadvancesController@showAdvance');
+
 
 Route::resource('companies','CompaniesController');
 Route::resource('projects','ProjectsController');

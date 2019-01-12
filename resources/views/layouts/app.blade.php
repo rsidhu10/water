@@ -7,6 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
@@ -79,7 +80,15 @@
                 @include('partials.success')
                 <div class="row">
                     @yield('content')
+
                 </div>
+                <script type="text/javascript">
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                </script>
             </div>        
      <!--   </main> -->
     </div>
