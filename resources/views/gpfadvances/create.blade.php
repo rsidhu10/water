@@ -8,9 +8,9 @@
 		<h3>Data Entry of GPF Advances</h3>
 	</div>
   <div class="container-fluid" style="width: 90%">
-    <form method="post" name="save-form" id="save-form" action="{{route('adminapprovals.store')}}">
+    <form method="post" name="save-form" id="save-form" action="{{route('gpfadvances.store')}}">
       {{ csrf_field() }}
-      <table class="table table-condensed table-striped">
+{{--       <table class="table table-condensed table-striped">
         <tr>
           <td width="12%" align="left" style="padding-left: 10px;">
             <span>Zone</span>
@@ -66,24 +66,32 @@
           </td>
         </tr>
       </table>
-      <div class="alert alert-success" style="visibility: hidden;" id="message">
+ --}}      <div class="alert alert-success" style="visibility: hidden;" id="message">
+        
         <p id="result" name="result" style="text-align: center;">
         </p>
+      </div>
+      <div>
+        @if(count($errors) > 0)
+          @foreach($errors->all() as $error)
+            <p class="alert alert-danger">{{$error}}</p>
+          @endforeach
+        @endif    
       </div>
      {{-- <div  class="table-responsive" id="Combo_details" >
         <table class="table table-striped" style="width: 75%; align-self: center;"> --}}
         <table class="table table-condensed table-borderless">
           <tr>
-            <th>
+            <th width="25%" >
               <span>Advance Approved By</span>
             </th>
-            <th>
+            <th  width="20%" >
               <span>Order No</span>
             </th>
-            <th>
+            <th width="25%" >
               <span>Order Date</span>
             </th>
-            <th>
+            <th width="30%" >
               <span>Advance Type</span>
             </th>
           </tr>
@@ -106,8 +114,8 @@
             <td>
               <select name="advance_type_cbo" id="advance_type_cbo" class="form-control input-sm" autofocus="autofocus" required>
                   <option value=""  Selected hidden >Select Type</option>
-                  <option value="1">Refundable</option>
-                  <option value="2" selected="true">Non-Refundable</option>
+                  <option value="Refundable">Refundable</option>
+                  <option value="Non-Refundable" selected="true">Non-Refundable</option>
 
               </select>
             <td>
@@ -130,19 +138,23 @@
             <td>
               <select name="reason_cbo" id="reason_cbo" class="form-control input-sm" autofocus="autofocus" required>
                   <option value=""  Selected hidden >Select Reason</option>
-                  <option value="1">Son's Marriage</option>
+                  @foreach($motives as $data)
+                    <option value="{{$data->id}}">{{$data->motive}}</option>
+                  @endforeach
+
+                  {{-- <option value="1">Son's Marriage</option>
                   <option value="2">Daughter's Marriage</option>
                   <option value="3">To Build House</option>
                   <option value="4">House Repair</option>
                   <option value="5">House Purchase</option>
-
+ --}}
 
               </select>
             <td>
               <select name="sanction_year_cbo" id="sanction_year_cbo" class="form-control input-sm" autofocus="autofocus" required>
                   <option value=""  Selected hidden >Select Year</option>
-                  <option value="1" selected="true">2018-2019</option>
-                  <option value="2">2019-2020</option>
+                  <option value="2018-2019" selected="true">2018-2019</option>
+                  <option value="2019-2020">2019-2020</option>
 
               </select>
             <td>
@@ -173,7 +185,7 @@
           </tr>
           <tr>
             <td>
-              <input class="form-control input-sm" type="text" name="nrdwp_share_txt" id="nrdwp_share_txt" placeholder="GPF No. (e.g : 123)" required >              
+              <input class="form-control input-sm" type="text" name="gpf_no_txt" id="gpf_no_txt" placeholder="GPF No. (e.g : 123)" required >              
             </td>
             <td colspan="2">
               <input class="form-control input-sm" type="text" name="emp_name_txt" id="emp_name_txt" placeholder="Employee Name" required >
@@ -181,6 +193,7 @@
             <td>
                 <select name="designation_cbo" id="designation_cbo" class="form-control input-sm" autofocus="autofocus" required>
                   <option value=""  Selected hidden >Select Designation</option>
+                  
               </select>
               </td>
            
@@ -203,17 +216,18 @@
             <tr>
               <td>
                 <select name="certificate_cbo" id="certificate_cbo" class="form-control input-sm" autofocus="autofocus" required>
-                  <option value=""  Selected hidden >Certificate Issued</option>
-                  <option value="0" selected="true">No</option>
+                  <option value=""  Selected hidden >Select Status</option>
+                  <option value="0">No</option>
                   <option value="1">Yes</option>
+                </select>
+                
 
-              </select>
               </td>
                <td>
-              <input class="form-control input-sm" type="text" name="certificate_no_txt" id="certificate_no_txt" placeholder="Letter No vide which Certificate Issued" required >
+              <input class="form-control input-sm" type="text" name="certificate_no_txt" id="certificate_no_txt" placeholder="Letter No vide which Certificate Issued" required disabled="true" >
             </td> 
             <td>
-             <input class="form-control input-sm" type="date" name="certificate_dt_txt" id="certificate_dt_txt"  required >
+             <input class="form-control input-sm" type="date" name="certificate_dt_txt" id="certificate_dt_txt"  required disabled="true">
             </td>
              <td>
               <input class="form-control input-sm" type="text" name="bill_no_txt" id="bill_no_txt" placeholder="Bill No." required >
@@ -254,7 +268,7 @@
               <div class="col-md-12" >
                   <button type="button" name="delete-btn" id="delete-btn" class="btn btn-danger input-sm">Delete</button>
                   <button type="button" name="reset-btn" id="reset-btn" class="btn btn-primary input-sm">Reset</button>
-                  <button type="button" name="save-btn" id="save-btn" class="btn btn-primary input-sm">Add New</button>
+                  <button type="button" name="save-btn" id="save-btn" class="btn btn-primary input-sm">Save</button>
                   <button type="button" name="update-btn" id="update-btn" class="btn btn-primary input-sm">Update</button>
                 </div>
             </td>
@@ -270,8 +284,8 @@
       </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="/resources/js/scripts/adminapprovals/fill.js"></script>
-  <script src="/resources/js/scripts/adminapprovals/addnew.js"></script>
+  <script src="/resources/js/scripts/gpfadvances/fill.js"></script>
+  <script src="/resources/js/scripts/gpfadvances/addnew.js"></script>
   
 
     

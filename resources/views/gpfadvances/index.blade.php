@@ -60,6 +60,17 @@
 @endsection
 
 @section('script')
+
+<script type="text/javascript">
+  function advtype(e){
+    var temp = e;
+    if(temp == 1){
+    return "Refundable"
+    }else{
+      return "Non-Refundable"
+    } 
+  }
+</script>
   <script type="text/javascript">
     $.ajaxSetup({
       headers: {
@@ -136,6 +147,7 @@
 
       })
     
+
 
   </script>
 

@@ -8,6 +8,7 @@ class Gpfadvance extends Model
 {
     protected $fillable = [
 	    'id',
+	    'approvedby',
 	    'year',
 	    'category',
 	    'gpf_no',
@@ -29,5 +30,9 @@ class Gpfadvance extends Model
 	    'ref_sr',
 	    'flaged',
 	    'retirement_dt',
+	    'certificate',
+	    'certificate_no',
+	    'certificate_dt',
+
 	];
 }

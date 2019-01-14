@@ -11,7 +11,7 @@ class Designation extends Model
     public $incrementing = false;
     protected $fillable = [
 	    'id',
-	    'category',
+	    'gpf_category',
 	    'designation',
 	];
 
@@ -19,4 +19,9 @@ class Designation extends Model
     {
         return $this->hasMany('App\Employee');
     }
+
+    public function Gpfcategory()
+    {
+        return $this->belongsTo('App\Gpfcategory');
+    }  
 }

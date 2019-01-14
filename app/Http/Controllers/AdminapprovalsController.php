@@ -65,6 +65,8 @@ class AdminapprovalsController extends Controller
     public function circles(){
       $zone_id = Input::get('zone_id');
       $circles = Circle::where('zone_id', '=', $zone_id)->get();
+      //$circles = Designation::where('gpf_category', '=', $zone_id)->get();
+
       return response()->json($circles);
     }
 
@@ -196,5 +198,11 @@ class AdminapprovalsController extends Controller
               return view('adminapprovals.employeelist', compact('employees'));        
     }
 
+    public function mydesignations()
+    {
+      $id = Input::get('id');
+      $designations = Designation::where('gpf_category', '=', $id)->get();
+      return response()->json($designations);
+    }  
 
 }

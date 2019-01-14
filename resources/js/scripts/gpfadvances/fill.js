@@ -115,28 +115,61 @@ window.load=$(document).ready(function(){
 
 
 
+  $('#category_cbo').on('change', function(e){
+    console.log(e);
+    var id = e.target.value;
+    $.get('/json-designs?id=' + id,function(data) {
+      console.log(data);
+      console.log(id);
+      
+      $('#designation_cbo').empty();
+      $('#designation_cbo').append('<option value="0" disable="true" Selected hidden> Select Designation </option>');
 
-      $('#scheme_cbo').on('change',function(){//change state to display all city
-        
-        var schemeID = $(this).val();
-        console.log(schemeID);
-        if(schemeID != ''){
-          $.ajax({
-            url:"/json-schemedata",
-            //url:"fetch_dist.php",
-            method:"GET",
-            data:{scheme_id:schemeID},
-           // dataType:"JSON",
-            success:function(data){
-                document.getElementById("district_txt").value = data=>district_id;
-                console.log(data=>district_id);
-                console.log(data=>subdivision_id);
-                
-             //   console.log(data.districtid);
-            }
-          })
-        }
+      $.each(data, function(index, dataObj){
+        $('#designation_cbo').append('<option value="'+ dataObj.id +'">'+ dataObj.designation +'</option>');
+      })
     });
+  });
+
+  
+  //$("#save-btn").removeAttr('disabled');
+  $("#certificate_no").attr('disabled', 'disabled');
+  $("#certificate_dt").attr('disabled', 'disabled');
+  
+  //$('#certificate_cbo').append('<option value="'+ dataObj.id +'">'+ dataObj.designation +'</option>');
+    
+
+
+  // Function for Certificate 
+  $('#certificate_cbo').on('change',function(){
+    //alert('Certificate Combo Changed');
+        var temp_val = $(this).val();
+        
+        if(temp_val == "0"){
+        console.log("Status Changed : " + temp_val);  
+            $('#certificate_no_txt').attr('disabled', 'disabled');
+            $('#certificate_dt_txt').attr('disabled', 'disabled');
+            document.getElementById('certificate_no_txt').value = '';
+            document.getElementById('certificate_dt_txt').value = '';
+           
+        }else if(temp_val == "1"){
+            console.log("Status Changed : " + temp_val);
+            $('#certificate_no_txt').removeAttr('disabled');
+            $('#certificate_dt_txt').removeAttr('disabled');
+        }    
+        
+    });     
+ 
+  
+function advtype(e){
+    var temp = e;
+    if(temp == 1){
+    return "Refundable"
+    }else{
+      return "Non-Refundable"
+    } 
+  }
+  
 
 
 }); 

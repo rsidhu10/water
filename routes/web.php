@@ -33,7 +33,7 @@ Route::get('/json-schemes', 'AdminapprovalsController@schemes');
 Route::get('/json-schemedata', 'AdminapprovalsController@schemedata');
 Route::get('/show-data', 'AdminapprovalsController@showRecord');
 Route::get('/show-gpf-adv', 'GpfadvancesController@showAdvance');
-
+Route::get('/json-designs','AdminapprovalsController@mydesignations');
 
 Route::resource('companies','CompaniesController');
 Route::resource('projects','ProjectsController');

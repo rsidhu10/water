@@ -1,7 +1,7 @@
 <?php $num =1; ?>
 
 @foreach($gpfadvances as $data)
-
+  
     <tr>
         <td style="text-align: center;">{{$num}}</td>
         <td style="text-align: center;"  >{{$data->gpf_no}}</td>
